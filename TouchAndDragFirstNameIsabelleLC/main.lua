@@ -38,15 +38,78 @@ girlThree.y = 500
 -- Function: GirlOneListener
 -- Input: touch listener
 -- Output: none
--- Description: when girl two is touched, move her
+-- Description: when girl one is touched, move her
 local function GirlOneListener(touch)
 
 	if (touch.phase == "began") then
-		if (alreadyTouchedGirlOne == true) then
-			alreadyTouchedGirlTwo = false
-			alreadyTouchedGirlThree = false
+		if (alreadyTouchedGirlTwo == false) and (alreadyTouchedGirlThree == false) then
+			alreadyTouchedGirlOne = true
 		end
 	end
 
+	if ( (touch.phase == "moved") and (alreadyTouchedGirlOne == true) ) then
+		girlOne.x = touch.x
+		girlOne.y = touch.y
+	end
+	
+	if	(touch.phase == "ended") then
+		alreadyTouchedGirlOne = false
+		alreadyTouchedGirlTwo = false
+		alreadyTouchedGirlThree = false
+	end
+end
+
 -- add respective listener
 girlOne:addEventListener("touch", GirlOneListener)
+
+-------------------------------------------------------------------------------
+
+-- Function
+local function GirlTwoListener(touch)
+
+	if (touch.phase == "began") then
+		if (alreadyTouchedGirlOne == false) and (alreadyTouchedGirlThree == false) then
+			alreadyTouchedGirlTwo = true
+		end
+	end
+
+	if ( (touch.phase == "moved") and (alreadyTouchedGirlTwo == true) ) then
+		girlTwo.x = touch.x
+		girlTwo.Y = touch.y
+	end
+
+	if	(touch.phase == "ended") then
+		alreadyTouchedGirlOne = false
+		alreadyTouchedGirlTwo = false
+		alreadyTouchedGirlThree = false
+	end
+end
+
+-- add respective listener
+girlTwo:addEventListener("touch", GirlTwoListener)
+
+-------------------------------------------------------------------------------
+
+-- Function
+local function GirlThreeListener(touch)
+
+	if (touch.phase == "began") then
+		if (alreadyTouchedGirlOne == false) and (alreadyTouchedGirlTwo == false) then
+			alreadyTouchedGirlThree = true
+		end
+	end
+
+	if ( (touch.phase == "moved") and (alreadyTouchedGirlThree == true) ) then
+		girlThree.x = touch.x
+		girlThree.Y = touch.y
+	end
+
+	if  (touch.phase == "ended") then
+		alreadyTouchedGirlOne = false
+		alreadyTouchedGirlTwo = false
+		alreadyTouchedGirlThree = false
+	end
+end
+
+-- add respective listener
+girlThree:addEventListener("touch", GirlThreeListener)
