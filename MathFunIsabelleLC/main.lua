@@ -1,19 +1,24 @@
--- Title: NumericTextFields
+-- Title: MathFun
 -- Name: Isabelle LC
 -- Course: ICS2O/3C
--- This program displays a math question and asks the user to answer in a numeric
--- textfield terminal.
-------------------------------------------------------------------------------------------------
+-- This program displays a math question and asks the user to answer in a numeric textfield terminal
+------------------------------------------------------------------------------------------------------
 
 -- hide the status bar
 display.setStatusBar(display.HiddenStatusBar)
 
--- sets the background colour
-display.setDefault("background", 255/255, 180/255, 80/255)
+-- sets the background image
+local backgroundImage = display.newImageRect("Images/background.jpg", 2048, 1536)
 
-----------------------------------------------------------------------------------------------
--- LOCAL VARIABLES
-----------------------------------------------------------------------------------------------
+-- create a character
+local character = display.newImageRect("Images/stickman.png", 300, 500)
+
+-- set the (x,y) position of the character
+character.x = 160
+character.y = 500
+-----------------------------------------------------------------------------------------------------
+-- Local Variables
+-----------------------------------------------------------------------------------------------------
 
 -- create the local variables
 local questionObject
@@ -25,20 +30,46 @@ local randomNumber2
 local userAnswer
 local correctAnswer
 local incorrectAnswer
+local randomOperator
 
-----------------------------------------------------------------------------------------------
--- LOCAL FUNCTIONS
-----------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------
+-- Local Functions
+------------------------------------------------------------------------------------------------------
 
 local function AskQuestion()
-	-- generate 2 random numbers between a max. and a min. number
-	randomNumber1 = math.random(0, 20)
-	randomNumber2 = math.random(0, 20)
+	-- generate a random number between 1 and 3
+	-- ***declare this veriable above
+	randomOperator = math.random(1,3)
 
-	correctAnswer = randomNumber1 + randomNumber2
+	-- generate 2 random numbers
+	randomNumber1 = math.random(10,20)
+	randomNumber2 = math.random(0,10)
 
-	-- create question in text object
-	questionObject.text = randomNumber1 .. "+" .. randomNumber2 .. "="
+	-- if the random operator is 1, then do addition
+	if (randomOperator == 1) then
+
+		-- calculate the correct answer
+		correctAnswer = randomNumber1 + randomNumber2
+
+		-- create question in tect object
+		questionObject.text = randomNumber1 .. " + " .. randomNumber2 .. " = "
+
+	-- otherwise, if the random operator is 2, do subtraction
+	elseif (randomOperator == 2) then
+		-- calculate the correct answer
+		correctAnswer = randomNumber1 - randomNumber2
+
+		-- create question in the text object
+		questionObject.text = randomNumber1 .. " - " .. randomNumber2 .. " = "
+
+	-- if the random operator selected is 3, then do multiplication
+	elseif (randomOperator == 3) then
+		-- calculate the correct answer
+		correctAnswer = randomNumber1 * randomNumber2
+
+		-- create question in text object
+		questionObject.text = randomNumber1 .. " x " .. randomNumber2 .. " = "
+	end
 end
 
 local function HideCorrect()
@@ -73,12 +104,14 @@ local function NumericFieldListener( event )
 			timer.performWithDelay(2000, HideCorrect)
 			
 		else incorrectObject.isVisible = true
-			timer.performWithDelay(2000,HideIncorrect)
+			timer.performWithDelay(2000, HideIncorrect)
 			correctObject.isVisible = false
 		end
+
+		-- clear text field
+		event.target.text = ""
 	end
 end
-
 ----------------------------------------------------------------------------------------------------
 -- OBJECT CREATION
 ----------------------------------------------------------------------------------------------------
