@@ -42,7 +42,8 @@ textObject.y = display.contentHeight/3
 textObject:setTextColor(0, 0, 0)
 textObject.isVisible = false
 
-local correct = audio.play("Sounds/Correct Answer Sound Effect.mp3")
+local correct = audio.loadSound("Sounds/Correct Answer Sound Effect.mp3")
+local correctSoundChannel
 --------------------------------------------------------------------------------------
 
 -- Function: BlueButtonListener
@@ -55,17 +56,20 @@ local function BlueButtonListener(touch)
 		blueButton.isVisible = false
 		redButton.isVisible = true
 		textObject.isVisible = true
-		correct = true
 		angel.isVisible = true
 		devil.isVisible = true
 		backgroundImage.isVisible = true
+
+		correctSoundChannel = audio.play(correct)
+
+		timer.performWithDelay(2000, HideCorrect)
+
 	end
 
 	if (touch.phase == "ended") then
 		blueButton.isVisible = true
 		textObject.isVisible = false
 		redButton.isVisible = false
-		correct = false
 		angel.isVisible = false
 		devil.isVisible = false
 		backgroundImage.isVisible = false
@@ -78,17 +82,20 @@ local function RedButtonListener(touch)
 		redButton.isVisible = true
 		blueButton.isVisible = false
 		textObject.isVisible = true
-		correct = true
 		angel.isVisible = true
 		devil.isVisible = true
 		backgroundImage.isVisible = true
+
+		correctSoundChannel = audio.play(correct)
+
+		timer.performWithDelay(2000, HideCorrect)
+
 	end
 
 	if (touch.phase == "ended") then
 		blueButton.isVisible = true
 		textObject.isVisible = false
 		redButton.isVisible = false
-		correct = false
 		angel.isVisible = false
 		devil.isVisible = false
 		backgroundImage.isVisible = false
@@ -101,7 +108,6 @@ local function CorrectSoundListener(touch)
 		redButton.isVisible = true
 		blueButtun.isVisible = false
 		textObject.isVisible = true
-		correct = true
 		angel.isVisible = true
 		devil.isVisible = true
 		backgroundImage.isVisible = true
@@ -111,7 +117,6 @@ local function CorrectSoundListener(touch)
 		blueButton.isVisible = true
 		textObject.isVisible = false
 		redButton.isVisible = false
-		correct = false
 		angel.isVisible = false
 		devil.isVisible = false
 		backgroundImage.isVisible = false

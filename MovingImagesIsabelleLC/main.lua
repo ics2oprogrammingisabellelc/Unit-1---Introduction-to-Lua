@@ -5,9 +5,15 @@
 -- I added another object that moves in a different direction as well as a
 -- background image.
 ------------------------------------------------------------------------------------
+-- SOUNDS
+local backgroundMusic = audio.loadSound( "Sounds/music.mp3" )
+local backgroundMusicChannel
+------------------------------------------------------------------------------------
 
 -- hide the status bar
 display.setStatusBar(display.HiddenStatusBar)
+
+backgroundMusicChannel = audio.play(backgroundMusic)
 
 -- global variables
 scrollSpeed = 3
