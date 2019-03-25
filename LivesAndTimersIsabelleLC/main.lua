@@ -197,7 +197,7 @@ numericField.inputType = "number"
 -- add the event listener for the numeric field
 numericField:addEventListener ( "userInput", NumericFieldListener )
 
-clockText = display.newText( "", display.contentWidth/4, display.contentHeight/2, nil, 50 )
+clockText = display.newText( "" .. secondsLeft, display.contentWidth/4, display.contentHeight/2, nil, 50 )
 clockText:setTextColor(1, 1, 0)
 
 -----------------------------------------------------------------------------------------------------
