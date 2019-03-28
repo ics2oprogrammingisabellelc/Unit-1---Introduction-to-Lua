@@ -73,14 +73,19 @@ if (secondsLeft == 0) then
 
 	-- *** IF THERE ARE NO LIVES LEFT, PLAY A LOSE SOUND, SHOW A YOU LOSE IMAGE
 	-- AND CANCEL THE TIMER, REMOVE THE THIRD HEART BY MAKING IT INVISIBLE
-	if (lives == 2) then
+	if (lives == 3) then
+		heart3.isVisible = false
+	elseif (lives == 2) then
 		heart2.isVisible = false
 	elseif (lives == 1) then
 		heart1.isVisible = false
-	end
+	elseif (lives == 0) then
+			timer.cancel(countDownTimer)
 
-	-- *** CALL THE FUNCTION TO ASK A NEW QUESTION
+		end
+	end
 end
+	-- *** CALL THE FUNCTION TO ASK A NEW QUESTION
 
 -- function that calls timer
 local function StartTimer()
@@ -197,7 +202,7 @@ numericField.inputType = "number"
 -- add the event listener for the numeric field
 numericField:addEventListener ( "userInput", NumericFieldListener )
 
-clockText = display.newText( "" .. secondsLeft, display.contentWidth/4, display.contentHeight/2, nil, 50 )
+clockText = display.newText( "" .. secondsLeft, display.contentWidth/4, display.contentHeight/4, nil, 50 )
 clockText:setTextColor(1, 1, 0)
 
 -----------------------------------------------------------------------------------------------------
@@ -206,3 +211,4 @@ clockText:setTextColor(1, 1, 0)
 
 -- call the funtion to ask the question
 AskQuestion()
+StartTimer()
