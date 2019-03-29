@@ -136,9 +136,23 @@ local function fourthBall()
 end
 
 ------------------------------------------------------------------------------------
+
+-- create the first ball
+local function fifthBall()
+	-- create the ball
+	local ball5 = display.newImage("Images/super_ball.png", 0 ,0)
+
+	-- add to physics
+	physics.addBody(ball5, {density=1.0, friction=0.5, bounce=0.3, radius=500})
+
+	ball5:scale(20, 20)
+end
+
+------------------------------------------------------------------------------------
 -- timer delays
 ------------------------------------------------------------------------------------
 timer.performWithDelay(0, firstBall)
 timer.performWithDelay(500, secondBall)
 timer.performWithDelay(1000, thirdBall)
 timer.performWithDelay(1500, fourthBall)
+timer.performWithDelay(1500, fifthBall)
