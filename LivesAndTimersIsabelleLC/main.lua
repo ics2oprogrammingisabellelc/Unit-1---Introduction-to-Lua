@@ -6,6 +6,8 @@
 -- If the user gets the answer wrong, or runs out of time, 
 -- they will lose a life.
 ----------------------------------------------------------------------------
+-- hide status bar
+display.setStatusBar(display.HiddenStatusBar)
 
 -- variables for the timer
 local totalSeconds = 15
@@ -19,6 +21,7 @@ local lives = 3
 local heart1
 local heart2
 local heart3
+
 -----------------------------------------------------------------------------
 
 -- variables for incorrect, correct, & points
@@ -208,7 +211,6 @@ clockText:setTextColor(1, 1, 0)
 -----------------------------------------------------------------------------------------------------
 -- FUNCTION CALLS
 -----------------------------------------------------------------------------------------------------
-
 -- call the funtion to ask the question
 AskQuestion()
 StartTimer()
